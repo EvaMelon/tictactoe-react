@@ -10,6 +10,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">tic tac toe</h1>
         </header>
+        <Game />
       </div>
     );
   }
@@ -74,9 +75,6 @@ class Game extends React.Component {
 
 // ========================================
 
-ReactDOM.render(
-  <Game />,
-  document.getElementById('root')
-);
+
 
 export default App;
