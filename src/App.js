@@ -18,7 +18,7 @@ class App extends Component {
 
 function Square(props) {
   return (
-    <button className="square" onClick={(props.onClick)}>
+    <button className={"square " + (props.value ? "full" : "empty")} onClick={(props.onClick)}>
       {props.value}
     </button>
   );
@@ -57,7 +57,7 @@ class Board extends React.Component {
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
-    squares[i] = this.state.xIsNext ? '#' : '@';
+    squares[i] = this.state.xIsNext ? 'X' : 'O';
     this.setState({
       squares: squares,
       xIsNext: !this.state.xIsNext,
@@ -85,8 +85,9 @@ class Board extends React.Component {
 
     //const status = 'Next player: ' + (this.state.xIsNext ? '#' : '@');
 
+    // WARUNEK ? SPELNIONY : NIESPELNIONY
     return (
-      <div>
+      <div className={(this.state.xIsNext ? 'next-x' : 'next-o')}>
         <div className="status">{status}</div>
         <div className="board-row">
           {this.renderSquare(0)}

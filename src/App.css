@@ -42,8 +42,16 @@
   font-size:30px;
 }
 
+.next-o .square.empty:hover::after {
+  content:"O";
+  color:grey;
+}
+
+.next-x .square.empty:hover::after {
+  content:"X";
+  color:pink;
+}
+
 .status {
   padding:30px 0;
 }
-
-
