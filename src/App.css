@@ -56,6 +56,14 @@
   padding:30px 0;
 }
 
+.full-o {
+  background-color:green;
+}
+
+.full-x {
+  background-color: yellow;
+}
+
 .won {
   background-color:lightgreen;
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import logo from './logo.svg';
 import './App.css';
 
@@ -16,9 +17,18 @@ class App extends Component {
   }
 }
 
-function Square(props) {
+function Field(props) {
   return (
-    <button className={"square " + (props.value ? "full" : "empty") + (props.won ? " won" : "")} onClick={(props.onClick)}>
+    <button 
+      className={classNames({
+        "field": true,
+        "full": props.value,
+        "empty": !props.value,
+        "won": props.won,
+        "full-x": props.value=="X",
+        "full-o": props.value=="O"
+      })}
+      onClick={(props.onClick)}>
       {props.value}
     </button>
   );
@@ -35,20 +45,20 @@ class Board extends React.Component {
   }
 
   handleClick(i) {
-    const squares = this.state.squares.slice();
-    if (calculateWinner(squares).winner || squares[i]) {
+    const fields = this.state.squares.slice();
+    if (calculateWinner(fields).winner || fields[i]) {
       return;
     }
-    squares[i] = this.state.xIsNext ? 'X' : 'O';
+    fields[i] = this.state.xIsNext ? 'X' : 'O';
     this.setState({
-      squares: squares,
+      squares: fields,
       xIsNext: !this.state.xIsNext,
     });
   }
 
-  renderSquare(i, winningMove) {
+  renderField(i, winningMove) {
     return (
-      <Square
+      <Field
         value={this.state.squares[i]}
         onClick={() => this.handleClick(i)}
         won={winningMove.includes(i) ? true : false}
@@ -70,19 +80,19 @@ class Board extends React.Component {
       <div className={(this.state.xIsNext ? 'next-x' : 'next-o')}>
         <div className="status">{status}</div>
         <div className="board-row">
-          {this.renderSquare(0, winningMove)}
-          {this.renderSquare(1, winningMove)}
-          {this.renderSquare(2, winningMove)}
+          {this.renderField(0, winningMove)}
+          {this.renderField(1, winningMove)}
+          {this.renderField(2, winningMove)}
         </div>
         <div className="board-row">
-          {this.renderSquare(3, winningMove)}
-          {this.renderSquare(4, winningMove)}
-          {this.renderSquare(5, winningMove)}
+          {this.renderField(3, winningMove)}
+          {this.renderField(4, winningMove)}
+          {this.renderField(5, winningMove)}
         </div>
         <div className="board-row">
-          {this.renderSquare(6, winningMove)}
-          {this.renderSquare(7, winningMove)}
-          {this.renderSquare(8, winningMove)}
+          {this.renderField(6, winningMove)}
+          {this.renderField(7, winningMove)}
+          {this.renderField(8, winningMove)}
         </div>
       </div>
     );
